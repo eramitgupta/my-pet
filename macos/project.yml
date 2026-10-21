@@ -22,7 +22,7 @@ settings:
     # SPARKLE_PUBLIC_KEY is the *public* half of the EdDSA update key: safe to commit. Set it with
     # scripts/sparkle-keys.sh. The private key stays in your Keychain and in the
     # SPARKLE_PRIVATE_KEY GitHub secret, never in git. While empty, builds can't update themselves.
-    SPARKLE_PUBLIC_KEY: ""
+    SPARKLE_PUBLIC_KEY: "rpboo2MWLXDarVu/44CqJEqz5bXGrurFCoRl/vxm4FA="
     SPARKLE_FEED_URL: "https://eramitgupta.github.io/my-pet/appcast.xml"
     ARCHS: "$(ARCHS_STANDARD)"            # arm64 + x86_64
     ONLY_ACTIVE_ARCH: "NO"
