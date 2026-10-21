@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rust:
+    name: Rust core
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          rustup toolchain install stable --profile minimal --component rustfmt,clippy
+          rustup target add aarch64-apple-darwin x86_64-apple-darwin
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            target
+          key: cargo-${{ runner.os }}-${{ hashFiles('Cargo.lock', 'rust/**/Cargo.toml') }}
+      - run: cargo fmt --all --check
+      - run: cargo clippy --all-targets -- -D warnings
+      - run: cargo test --all-targets -- --nocapture
+      - run: scripts/build-rust.sh release
+
+  app:
+    name: macOS app
+    runs-on: macos-15
+    needs: rust
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
+      - name: Xcode build & unit tests
+        run: |
+          xcodebuild -project macos/mypet.xcodeproj -scheme mypet -configuration Debug \
+            -destination 'platform=macOS' CODE_SIGN_IDENTITY=- test | tee xcodebuild.log
+      - name: End-to-end update test (real Sparkle, offline, throwaway key)
+        run: scripts/test-updates.sh
+      - name: SwiftPM universal release build
+        run: scripts/build-app.sh release
+      - name: DMG
+        run: scripts/make-dmg.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mypet-unsigned
+          path: build/MyPet-*.dmg

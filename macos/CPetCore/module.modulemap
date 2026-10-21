@@ -1,0 +1,5 @@
+module CPetCore [system] {
+    header "../../include/pet_core.h"
+    link "pet_core"
+    export *
+}

@@ -1,0 +1,73 @@
+name: 🐞 Bug report
+description: Something isn't working as expected.
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please search [existing issues](https://github.com/eramitgupta/mypet/issues) first.
+        **Security problems:** don't file them here; see [SECURITY.md](https://github.com/eramitgupta/mypet/blob/main/SECURITY.md).
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+      placeholder: The menu-bar pet stops animating after the Mac wakes from sleep.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open MyPet
+        2. Put the Mac to sleep for a few minutes
+        3. Wake it up
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: MyPet version
+      description: Settings → About
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "macOS 15.3"
+    validations:
+      required: true
+  - type: dropdown
+    id: chip
+    attributes:
+      label: Mac
+      options:
+        - Apple Silicon (M1/M2/M3/M4…)
+        - Intel
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How did you install MyPet?
+      options:
+        - Release DMG
+        - Built from source (scripts/build-app.sh)
+        - Built with Xcode
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: |
+        Logs: run `log show --last 10m --info --predicate 'subsystem == "com.erag.mypet"'` in Terminal.
+        Crash reports are in `~/Library/Logs/DiagnosticReports/MyPet-*.ips`.
+      render: text

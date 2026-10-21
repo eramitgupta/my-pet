@@ -1,0 +1,18 @@
+[workspace]
+members = ["rust/pet-core"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["eramitgupta (https://github.com/eramitgupta)"]
+repository = "https://github.com/eramitgupta/mypet"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+# Panics must stay catchable: every FFI entry point wraps its body in catch_unwind.
+panic = "unwind"
+debug = "line-tables-only"

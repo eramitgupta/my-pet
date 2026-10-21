@@ -1,0 +1,119 @@
+name: Release
+
+# Push a tag like v0.2.0 (matching Cargo.toml and a "## [0.2.0]" CHANGELOG section) to:
+#   build → sign + notarise (if a Developer ID is configured) → package DMG + update ZIP →
+#   publish the GitHub release → add the update to the signed Sparkle appcast on GitHub Pages.
+# Setup (certificates, Sparkle key, Pages): docs/UPDATES.md
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write # create the release and push the appcast to the gh-pages branch
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: macos-15
+    env:
+      # `secrets` can't be used in step conditions directly; expose flags instead.
+      HAS_CERT: ${{ secrets.MACOS_CERT_P12_BASE64 != '' }}
+      HAS_SPARKLE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check version, tag and changelog agree
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          CARGO="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
+          XCODE="$(sed -n 's/^ *MARKETING_VERSION: *"\(.*\)"/\1/p' macos/project.yml | head -1)"
+          [ "$VERSION" = "$CARGO" ] || { echo "::error::Tag $GITHUB_REF_NAME doesn't match Cargo.toml ($CARGO)"; exit 1; }
+          [ "$VERSION" = "$XCODE" ] || { echo "::error::Tag $GITHUB_REF_NAME doesn't match MARKETING_VERSION in macos/project.yml ($XCODE)"; exit 1; }
+          scripts/release-notes.sh "$VERSION" > "$RUNNER_TEMP/notes.md"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Toolchain
+        run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
+
+      - name: Tests
+        run: cargo test --all-targets
+
+      - name: Resolve Swift packages (Sparkle)
+        run: swift package --package-path macos resolve
+
+      # Developer ID signing is optional: without it the release is ad-hoc signed and users
+      # confirm the first launch. Sparkle updates work either way (they're EdDSA-verified).
+      - name: Import signing certificate
+        if: env.HAS_CERT == 'true'
+        env:
+          P12: ${{ secrets.MACOS_CERT_P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+        run: |
+          KEYCHAIN="$RUNNER_TEMP/signing.keychain-db"
+          security create-keychain -p "" "$KEYCHAIN"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN"
+          security unlock-keychain -p "" "$KEYCHAIN"
+          echo "$P12" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" -k "$KEYCHAIN" -P "$P12_PASSWORD" -T /usr/bin/codesign
+          rm -P "$RUNNER_TEMP/cert.p12"
+          security set-key-partition-list -S apple-tool:,apple: -s -k "" "$KEYCHAIN"
+          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+
+      - name: Build, sign and notarise
+        if: env.HAS_CERT == 'true'
+        env:
+          MYPET_SIGN_IDENTITY: ${{ secrets.MACOS_SIGN_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+        run: scripts/notarize.sh
+
+      - name: Build (ad-hoc signed)
+        if: env.HAS_CERT != 'true'
+        run: |
+          echo "::warning::No Developer ID certificate configured; publishing an ad-hoc-signed build."
+          scripts/build-app.sh release
+          scripts/make-dmg.sh
+
+      - name: Check out the appcast (gh-pages branch)
+        if: env.HAS_SPARKLE_KEY == 'true'
+        run: |
+          if git fetch --depth 1 origin gh-pages; then
+            git worktree add pages FETCH_HEAD -B gh-pages
+          else
+            git worktree add --orphan -b gh-pages pages
+          fi
+
+      - name: Create the Sparkle update and sign the appcast
+        if: env.HAS_SPARKLE_KEY == 'true'
+        env:
+          SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
+        run: |
+          scripts/publish-update.sh pages/appcast.xml \
+            "https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/"
+
+      - name: Warn when updates aren't configured
+        if: env.HAS_SPARKLE_KEY != 'true'
+        run: echo "::warning::SPARKLE_PRIVATE_KEY is not set, so this release is not offered as an in-app update (see docs/UPDATES.md)."
+
+      # The release (with its files) goes up first, so the appcast never points at a missing file.
+      - name: Publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          shopt -s nullglob
+          ASSETS=(build/MyPet-"$VERSION".dmg build/MyPet-"$VERSION".zip)
+          gh release create "$GITHUB_REF_NAME" "${ASSETS[@]}" --title "MyPet $VERSION" --notes-file "$RUNNER_TEMP/notes.md"
+
+      - name: Publish the appcast to GitHub Pages
+        if: env.HAS_SPARKLE_KEY == 'true'
+        run: |
+          cd pages
+          touch .nojekyll
+          git add appcast.xml .nojekyll
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "Appcast: MyPet $VERSION"
+          git push origin gh-pages

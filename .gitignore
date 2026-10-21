@@ -1,0 +1,14 @@
+/target/
+/build/
+macos/.build/
+macos/.swiftpm/
+*.xcuserstate
+xcuserdata/
+DerivedData/
+.DS_Store
+
+# Signing material must never be committed (Sparkle private keys, certificates).
+*.key
+*.p12
+*.pem
+sparkle_private*

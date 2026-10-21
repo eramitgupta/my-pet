@@ -1,0 +1,30 @@
+[package]
+name = "pet-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "System monitoring, gradient, behaviour and movement engine for mypet"
+publish = false
+
+[lib]
+name = "pet_core"
+crate-type = ["staticlib", "rlib"]
+
+# Integration tests live in the repository-level tests/ directory.
+[[test]]
+name = "ffi_roundtrip"
+path = "../../tests/ffi_roundtrip.rs"
+
+[[test]]
+name = "header_check"
+path = "../../tests/header_check.rs"
+
+[[test]]
+name = "no_alloc_tick"
+path = "../../tests/no_alloc_tick.rs"
+
+[[test]]
+name = "live_sampling"
+path = "../../tests/live_sampling.rs"

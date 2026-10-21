@@ -1,0 +1,38 @@
+name: 🐾 New pet
+description: Propose a new pet (or a redesign of an existing one).
+labels: ["pet", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Pets are 32×32 pixel art with idle, walk, run, jump and sleep animations. See
+        [Adding a pet](https://github.com/eramitgupta/mypet#adding-a-pet) for the format.
+  - type: input
+    id: name
+    attributes:
+      label: Pet
+      placeholder: Owl
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Look and personality
+      description: Colours, key features, how it should move.
+    validations:
+      required: true
+  - type: textarea
+    id: art
+    attributes:
+      label: Artwork or references
+      description: Attach sprite strips, sketches or reference images if you have them. Only share art you have the rights to.
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Will you contribute the art?
+      options:
+        - Yes, I'll open a pull request
+        - I can provide sprites, but not code
+        - No, just an idea
+    validations:
+      required: true
