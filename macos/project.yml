@@ -13,7 +13,7 @@ packages:
     from: 2.10.0
 settings:
   base:
-    MARKETING_VERSION: "0.1.0"
+    MARKETING_VERSION: "0.0.1"
     # Sparkle compares CFBundleVersion, so it equals the release version (see build-app.sh).
     CURRENT_PROJECT_VERSION: "$(MARKETING_VERSION)"
     SWIFT_VERSION: "5.0"

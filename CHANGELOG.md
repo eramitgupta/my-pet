@@ -3,7 +3,7 @@
 All notable changes to MyPet are listed here. Each release's section is shown in the in-app
 update window, so write it for users: what's new and what got better.
 
-## [0.1.0] - 2026-10-21
+## [0.0.1] - 2026-10-21
 
 ### First release 🐈
 
