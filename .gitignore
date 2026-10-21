@@ -6,6 +6,7 @@ macos/.swiftpm/
 xcuserdata/
 DerivedData/
 .DS_Store
+__pycache__/
 
 # Signing material must never be committed (Sparkle private keys, certificates).
 *.key
