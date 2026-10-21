@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><!-- sparkle-sign-warning:
+IMPORTANT: This file was signed by Sparkle. Any modifications to this file requires re-signing this file with generate_appcast or sign_update! The signed signature will be embedded at the end of this file.
+--><rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>MyPet</title>
+    <link>https://github.com/eramitgupta/my-pet</link>
+    <description>Updates for MyPet, your Mac’s little companion.</description>
+    <language>en</language>
+    <item>
+      <title>Version 0.0.1</title>
+      <pubDate>Wed, 21 Oct 2026 17:44:11 GMT</pubDate>
+      <sparkle:version>0.0.1</sparkle:version>
+      <sparkle:shortVersionString>0.0.1</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+      <link>https://github.com/eramitgupta/my-pet/releases/tag/v0.0.1</link>
+      <description><![CDATA[
+<h3>First release 🐈</h3>
+<ul>
+<li>Six pixel-art pets (cat, dog, fox, rabbit, dinosaur, panda) that live in your menu bar.</li>
+<li>The pet's colour follows your Mac's memory, and its speed follows the CPU.</li>
+<li>Choose between <b>RAM usage</b> and <b>memory pressure</b>, and pick your own colours.</li>
+<li>Flip your pet, or let it turn around on its own.</li>
+<li>Battery-friendly: it stops animating when the menu bar is hidden and slows down on battery.</li>
+<li><b>Check for Updates…</b> keeps MyPet up to date automatically.</li>
+</ul>
+      ]]></description>
+      <enclosure url="https://github.com/eramitgupta/my-pet/releases/download/v0.0.1/MyPet-0.0.1.zip" length="2463526" type="application/octet-stream" sparkle:edSignature="czk2NrmFPZVamW0vTNRb6ZEtSqn6YQkFAEB+OV1aiGFUj5bPTp8rgvbbHuOIJMkQpD5XqE3jAsMRH1HN8QPBDA=="></enclosure>
+    </item>
+  </channel>
+</rss><!-- sparkle-signatures:
+edSignature: B0439RCjs1Mx9P1gJG0mM2JxWro7GHwbbj8cNeZeMmci9hsdNbkl3RfcSejHUGmeaFvNzIOKJgsPHNv3h7cFAw==
+length: 1899
+-->
