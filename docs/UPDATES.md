@@ -8,7 +8,7 @@ is a signed XML file on **GitHub Pages**.
 ```
  Your Mac (MyPet)                         GitHub
  ───────────────                          ──────
- Check for Updates… / daily check ──────► https://eramitgupta.github.io/mypet/appcast.xml
+ Check for Updates… / daily check ──────► https://eramitgupta.github.io/my-pet/appcast.xml
    verify the feed's EdDSA signature ◄─── (signed appcast, gh-pages branch)
    newer version? show the update window
    Install Update ──────────────────────► releases/download/vX.Y.Z/MyPet-X.Y.Z.zip
@@ -93,7 +93,7 @@ workflow prints a warning.
 After the first release, the workflow creates a `gh-pages` branch containing `appcast.xml`.
 Then go to **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch:
 `gh-pages` / root**. The feed will be served at
-`https://eramitgupta.github.io/mypet/appcast.xml`, which is `SPARKLE_FEED_URL` in
+`https://eramitgupta.github.io/my-pet/appcast.xml`, which is `SPARKLE_FEED_URL` in
 `macos/project.yml`.
 
 ## Releasing a new version
@@ -135,7 +135,7 @@ example `0.2.0`). Never reuse or lower a version number.
 scripts/build-app.sh release      # or scripts/notarize.sh with a Developer ID
 scripts/make-dmg.sh
 git worktree add pages gh-pages
-scripts/publish-update.sh pages/appcast.xml https://github.com/eramitgupta/mypet/releases/download/v0.2.0/
+scripts/publish-update.sh pages/appcast.xml https://github.com/eramitgupta/my-pet/releases/download/v0.2.0/
 gh release create v0.2.0 build/MyPet-0.2.0.dmg build/MyPet-0.2.0.zip --notes-file <(scripts/release-notes.sh 0.2.0)
 (cd pages && git add appcast.xml && git commit -m "Appcast: MyPet 0.2.0" && git push)
 ```

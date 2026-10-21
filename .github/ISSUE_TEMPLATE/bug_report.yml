@@ -5,8 +5,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to report a bug! Please search [existing issues](https://github.com/eramitgupta/mypet/issues) first.
-        **Security problems:** don't file them here; see [SECURITY.md](https://github.com/eramitgupta/mypet/blob/main/SECURITY.md).
+        Thanks for taking the time to report a bug! Please search [existing issues](https://github.com/eramitgupta/my-pet/issues) first.
+        **Security problems:** don't file them here; see [SECURITY.md](https://github.com/eramitgupta/my-pet/blob/main/SECURITY.md).
   - type: textarea
     id: what-happened
     attributes:

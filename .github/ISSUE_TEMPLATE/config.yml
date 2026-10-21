@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: 🔒 Report a security vulnerability
-    url: https://github.com/eramitgupta/mypet/security/advisories/new
+    url: https://github.com/eramitgupta/my-pet/security/advisories/new
     about: Please report security issues privately, not as public issues.
   - name: 💬 Questions and ideas
-    url: https://github.com/eramitgupta/mypet/discussions
+    url: https://github.com/eramitgupta/my-pet/discussions
     about: Ask questions and share ideas in Discussions.

@@ -2,7 +2,7 @@
 """Adds (or replaces) one release in mypet's Sparkle appcast.
 
   scripts/update-appcast.py --appcast pages/appcast.xml --version 0.2.0 \
-      --url https://github.com/eramitgupta/mypet/releases/download/v0.2.0/MyPet-0.2.0.zip \
+      --url https://github.com/eramitgupta/my-pet/releases/download/v0.2.0/MyPet-0.2.0.zip \
       --enclosure 'sparkle:edSignature="…" length="123"' [--changelog CHANGELOG.md]
 
 The enclosure attributes are the exact output of Sparkle's `sign_update` for the archive.
@@ -20,7 +20,7 @@ import re
 import sys
 from pathlib import Path
 
-REPO = "https://github.com/eramitgupta/mypet"
+REPO = "https://github.com/eramitgupta/my-pet"
 MIN_SYSTEM = "13.0"
 
 EMPTY_FEED = """<?xml version="1.0" encoding="utf-8"?>

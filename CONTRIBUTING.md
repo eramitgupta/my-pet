@@ -7,10 +7,10 @@ By participating, you agree to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Ways to contribute
 
-- **Report a bug**: open a [bug report](https://github.com/eramitgupta/mypet/issues/new?template=bug_report.yml).
+- **Report a bug**: open a [bug report](https://github.com/eramitgupta/my-pet/issues/new?template=bug_report.yml).
   Include your macOS version, your Mac (Apple Silicon or Intel) and the steps to reproduce.
-- **Suggest a feature**: open a [feature request](https://github.com/eramitgupta/mypet/issues/new?template=feature_request.yml).
-- **Add a pet**: propose it with the [new pet template](https://github.com/eramitgupta/mypet/issues/new?template=new_pet.yml)
+- **Suggest a feature**: open a [feature request](https://github.com/eramitgupta/my-pet/issues/new?template=feature_request.yml).
+- **Add a pet**: propose it with the [new pet template](https://github.com/eramitgupta/my-pet/issues/new?template=new_pet.yml)
   or send a pull request (see [Adding a pet](README.md#adding-a-pet)).
 - **Security issues**: please **don't** open a public issue. Follow [SECURITY.md](SECURITY.md).
 

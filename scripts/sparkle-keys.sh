@@ -14,7 +14,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BIN="$ROOT/macos/.build/artifacts/sparkle/Sparkle/bin"
-REPO="eramitgupta/mypet"
+REPO="eramitgupta/my-pet"
 if [[ ! -x "$BIN/generate_keys" ]]; then
   echo "Sparkle tools not found; resolving the Swift package…"
   GIT_TERMINAL_PROMPT=0 swift package --package-path "$ROOT/macos" resolve

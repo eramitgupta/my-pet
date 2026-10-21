@@ -16,9 +16,9 @@ reporting.
 
 Report them privately through GitHub instead:
 
-1. Go to the [Security tab](https://github.com/eramitgupta/mypet/security) of the repository.
+1. Go to the [Security tab](https://github.com/eramitgupta/my-pet/security) of the repository.
 2. Click **Report a vulnerability**
-   ([direct link](https://github.com/eramitgupta/mypet/security/advisories/new)).
+   ([direct link](https://github.com/eramitgupta/my-pet/security/advisories/new)).
 3. Describe the issue, the affected version and macOS version, the steps to reproduce, and its
    impact.
 

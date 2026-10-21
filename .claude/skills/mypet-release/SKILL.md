@@ -43,7 +43,7 @@ architectures, `codesign --verify --strict build/MyPet.app` should pass, and mak
 ## 4. Sparkle update and appcast
 
 The release workflow does this when the `SPARKLE_PRIVATE_KEY` secret exists. By hand:
-`scripts/publish-update.sh pages/appcast.xml https://github.com/eramitgupta/mypet/releases/download/vX.Y.Z/`.
+`scripts/publish-update.sh pages/appcast.xml https://github.com/eramitgupta/my-pet/releases/download/vX.Y.Z/`.
 It zips the app with `ditto`, EdDSA-signs the zip, adds the appcast item with release notes from
 CHANGELOG, signs the feed, and verifies the zip against the key embedded in the app. The full
 setup and troubleshooting are in `docs/UPDATES.md`. The app must have `SPARKLE_PUBLIC_KEY` set

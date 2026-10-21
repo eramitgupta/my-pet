@@ -7,7 +7,7 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 authors = ["eramitgupta (https://github.com/eramitgupta)"]
-repository = "https://github.com/eramitgupta/mypet"
+repository = "https://github.com/eramitgupta/my-pet"
 
 [profile.release]
 opt-level = 3

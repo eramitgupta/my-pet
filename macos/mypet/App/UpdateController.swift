@@ -15,7 +15,7 @@ private let log = Logger(subsystem: "com.erag.mypet", category: "updates")
 /// Application Support, outside the app bundle Sparkle replaces.
 @MainActor
 final class UpdateController: NSObject, ObservableObject {
-    static let releasesPage = URL(string: "https://github.com/eramitgupta/mypet/releases")!
+    static let releasesPage = URL(string: "https://github.com/eramitgupta/my-pet/releases")!
 
     /// True when this build carries an update signing key and feed. Local development builds
     /// made without a key can't verify updates, so they don't start the updater.

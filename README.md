@@ -3,15 +3,15 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/eramitgupta/mypet/releases"><img src="https://img.shields.io/github/v/release/eramitgupta/mypet?label=download" alt="Download"></a>
-  <a href="https://github.com/eramitgupta/mypet/actions/workflows/ci.yml"><img src="https://github.com/eramitgupta/mypet/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/eramitgupta/my-pet/releases"><img src="https://img.shields.io/github/v/release/eramitgupta/my-pet?label=download" alt="Download"></a>
+  <a href="https://github.com/eramitgupta/my-pet/actions/workflows/ci.yml"><img src="https://github.com/eramitgupta/my-pet/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/macOS-13%2B-black?logo=apple" alt="macOS 13+">
   <img src="https://img.shields.io/badge/Apple%20Silicon%20%26%20Intel-✓-lightgrey" alt="Apple Silicon and Intel">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/eramitgupta/mypet/releases"><b>Download</b></a> ·
+  <a href="https://github.com/eramitgupta/my-pet/releases"><b>Download</b></a> ·
   <a href="#how-to-read-your-pet">How to read your pet</a> ·
   <a href="#questions-people-ask">FAQ</a> ·
   <a href="https://github.com/sponsors/eramitgupta">❤️ Sponsor</a>
@@ -108,7 +108,7 @@ In short, **speed = CPU**, **colour = memory** (RAM usage or memory pressure, yo
 ## Install
 
 1. Download the latest **`MyPet-x.y.z.dmg`** from
-   [Releases](https://github.com/eramitgupta/mypet/releases).
+   [Releases](https://github.com/eramitgupta/my-pet/releases).
 2. Open it and drag **MyPet** into **Applications**.
 3. Open MyPet. Your pet appears in the menu bar. That's it!
 
@@ -227,7 +227,7 @@ Tips:
   `log stream --predicate 'subsystem == "com.erag.mypet"'` and restart MyPet to see why.
 
 Want it bundled with the app for everyone? Open a pull request, or suggest it with the
-[new pet template](https://github.com/eramitgupta/mypet/issues/new?template=new_pet.yml).
+[new pet template](https://github.com/eramitgupta/my-pet/issues/new?template=new_pet.yml).
 </details>
 
 ## For developers
@@ -280,7 +280,7 @@ AI coding assistant, it will find its instructions in [AGENTS.md](AGENTS.md).
 
 Ideas, bug reports, new pets and pull requests are all very welcome.
 
-- Found a bug or have an idea? [Open an issue](https://github.com/eramitgupta/mypet/issues/new/choose).
+- Found a bug or have an idea? [Open an issue](https://github.com/eramitgupta/my-pet/issues/new/choose).
 - Want to help with code? Start with [CONTRIBUTING.md](CONTRIBUTING.md).
 - Please be kind. See our [Code of Conduct](CODE_OF_CONDUCT.md).
 - Found a security problem? Please report it privately; see [SECURITY.md](SECURITY.md).

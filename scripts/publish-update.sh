@@ -2,7 +2,7 @@
 # Packages build/MyPet.app as a Sparkle update and adds it to the signed appcast.
 #   scripts/publish-update.sh <appcast.xml> <download-url-prefix>
 # Example (what the release workflow runs):
-#   scripts/publish-update.sh pages/appcast.xml https://github.com/eramitgupta/mypet/releases/download/v0.2.0/
+#   scripts/publish-update.sh pages/appcast.xml https://github.com/eramitgupta/my-pet/releases/download/v0.2.0/
 #
 # Signing key: SPARKLE_PRIVATE_KEY (the exported EdDSA private key, e.g. a GitHub secret) is
 # piped to sign_update on stdin and never touches disk. Without it, sign_update uses the

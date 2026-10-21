@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         Pets are 32×32 pixel art with idle, walk, run, jump and sleep animations. See
-        [Adding a pet](https://github.com/eramitgupta/mypet#adding-a-pet) for the format.
+        [Adding a pet](https://github.com/eramitgupta/my-pet#adding-a-pet) for the format.
   - type: input
     id: name
     attributes:

@@ -12,7 +12,7 @@ or pressure and whose speed follows CPU. Tagline: *Your Mac's Little Companion.*
 - **Stack:** Rust core (`rust/pet-core`, static library, C ABI) + Swift (SwiftUI settings and
   popover, AppKit menu bar, Core Animation rendering). macOS 13+, universal arm64 + x86_64.
 - **Identity:** display name **MyPet** (`MyPet.app`); identifiers stay lowercase: bundle ID `com.erag.mypet`, repo
-  `github.com/eramitgupta/mypet`, maintainer [@eramitgupta](https://github.com/eramitgupta), MIT.
+  `github.com/eramitgupta/my-pet`, maintainer [@eramitgupta](https://github.com/eramitgupta), MIT.
 - **Scope:** menu-bar pet only. The desktop-overlay pet was removed on purpose; don't
   reintroduce it unless asked.
 - **Deeper docs:** `GUIDELINES.md` (architecture, FFI contract, budgets), `docs/METRICS.md`
