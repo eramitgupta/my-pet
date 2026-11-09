@@ -203,11 +203,16 @@ func runPoses() -> [Pose] {
         let ph = Double(f) / 6 * 2 * .pi
         var p = Pose()
         // Lift only while a leg swings forward, so the collected phase still shows legs.
-        func leg(_ off: Double) -> Leg {
-            Leg(dx: sin(ph + off) * 3.0, lift: max(0, cos(ph + off)) * max(0, sin(ph + off) + 0.3) * 2.6)
+        // Legs reach out further than they tuck in, and each near/far pair is a full radian
+        // apart: with a symmetric ±3 swing all four feet met under the belly in the gathered
+        // frames, which at menu-bar size read as one merged leg.
+        func leg(_ off: Double, front: Bool) -> Leg {
+            let s = sin(ph + off)
+            let inward = front ? s < 0 : s > 0
+            return Leg(dx: s * (inward ? 1.6 : 3.2), lift: max(0, cos(ph + off)) * max(0, s + 0.3) * 2.6)
         }
-        p.frontNear = leg(0); p.frontFar = leg(0.5)
-        p.backNear = leg(.pi); p.backFar = leg(.pi + 0.5)
+        p.frontNear = leg(0, front: true); p.frontFar = leg(1.0, front: true)
+        p.backNear = leg(.pi, front: false); p.backFar = leg(.pi + 1.0, front: false)
         p.stretch = 1.0 + 0.08 * cos(ph)
         p.bodyY = -sin(ph) * 0.6
         p.headDY = 0.5
@@ -712,7 +717,7 @@ for s in species {
     }
     let manifest: [String: Any] = [
         "id": s.id, "displayName": s.name, "frameSize": [W, H], "baseColor": s.baseColor,
-        "animations": anims, "menuBarAnimation": "run", "author": "mypet", "license": "MIT",
+        "animations": anims, "menuBarAnimation": "run", "author": "MyPet", "license": "MIT",
     ]
     let json = try JSONSerialization.data(withJSONObject: manifest, options: [.prettyPrinted, .sortedKeys])
     try json.write(to: dir.appendingPathComponent("manifest.json"))

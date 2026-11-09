@@ -117,7 +117,7 @@ In short, **speed = CPU**, **colour = memory** (RAM usage or memory pressure, yo
 > once.
 
 MyPet runs quietly in the menu bar and doesn't show a Dock icon. To open Settings, click the
-pet → **Settings…**, or simply open MyPet again from Applications.
+pet → **Settings**, or simply open MyPet again from Applications.
 
 ## Questions people ask
 
@@ -162,7 +162,7 @@ Updates…*. You can turn automatic checks off in **Settings → General**.
 <details>
 <summary><b>How do updates work?</b></summary>
 
-Click the pet → **Check for Updates…**. If there's a new version, you'll see what's new and can
+Click the pet → **Check for Updates**. If there's a new version, you'll see what's new and can
 install it with one click. MyPet restarts on the new version with your settings and pets just
 as you left them. Every update is digitally signed, and MyPet refuses anything that isn't from
 the real project. By default it also checks quietly once a day.

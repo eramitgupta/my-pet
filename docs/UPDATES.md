@@ -18,7 +18,7 @@ is a signed XML file on **GitHub Pages**.
 
 ## What users see
 
-- **MyPet menu → Check for Updates…** (also in the app menu, and Settings → General → Check
+- **MyPet menu → Check for Updates** (also in the app menu, and Settings → General → Check
   Now). This works whether or not automatic checks are on.
 - **Update available:** Sparkle's native window shows the new version, the current version
   and the release notes (from `CHANGELOG.md`), with **Install Update**, **Remind Me Later** and

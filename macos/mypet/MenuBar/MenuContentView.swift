@@ -44,9 +44,13 @@ struct MenuContentView: View {
             Divider()
 
             HStack {
-                Button("Settings…", action: openSettings)
+                // Full labels without an ellipsis, and fixed size so the narrow popover never
+                // truncates them to "Check for Upd…".
+                Button("Settings", action: openSettings)
                     .keyboardShortcut(",", modifiers: .command)
-                Button("Check for Updates…") { updates.checkForUpdates() }
+                    .fixedSize()
+                Button("Check for Updates") { updates.checkForUpdates() }
+                    .fixedSize()
                     .disabled(updates.isConfigured && !updates.canCheckForUpdates)
                     .help("Check GitHub for a newer version of \(AppInfo.name)")
                 Spacer()
