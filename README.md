@@ -12,6 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/eramitgupta/my-pet/releases"><b>Download</b></a> ·
+  <a href="#is-mypet-safe-about-the-apple-could-not-verify-warning">Is it safe?</a> ·
   <a href="#how-to-read-your-pet">How to read your pet</a> ·
   <a href="#questions-people-ask">FAQ</a> ·
   <a href="https://github.com/sponsors/eramitgupta">❤️ Sponsor</a>
@@ -112,12 +113,90 @@ In short, **speed = CPU**, **colour = memory** (RAM usage or memory pressure, yo
 2. Open it and drag **MyPet** into **Applications**.
 3. Open MyPet. Your pet appears in the menu bar. That's it!
 
-> **First launch says it can't be opened?** Community builds may not be notarised by Apple
-> yet. Right-click MyPet in Applications → **Open** → **Open**. You only need to do this
-> once.
+The first time you open it, your Mac will probably show a warning. That's expected, and
+[the next section](#is-mypet-safe-about-the-apple-could-not-verify-warning) walks you through
+it in about a minute.
 
 MyPet runs quietly in the menu bar and doesn't show a Dock icon. To open Settings, click the
 pet → **Settings**, or simply open MyPet again from Applications.
+
+## Is MyPet safe? (About the "Apple could not verify" warning)
+
+When you open MyPet for the first time, macOS may say:
+
+> **"MyPet.app" Not Opened.** Apple could not verify "MyPet.app" is free of malware that may
+> harm your Mac or compromise your privacy.
+
+This sounds scary, but it **doesn't mean Apple found anything wrong**. It only means Apple
+hasn't checked this app yet.
+
+### Why you see this warning
+
+Apple has a review step called *notarisation*. To use it, a developer has to join the Apple
+Developer Program, which costs **$99 every year**. MyPet is a free, open-source hobby project
+made by one person, so it isn't notarised yet. Any app downloaded from the internet that skips
+this paid step gets the same warning, however safe it is.
+
+In short: the warning is about **paperwork with Apple**, not about what the app does.
+
+### How to open MyPet (one time only)
+
+**On macOS 15 Sequoia or newer** (including macOS 26 Tahoe):
+
+1. In the warning, click **Done**. Don't choose *Move to Bin*.
+2. Open the **Apple menu → System Settings → Privacy & Security**.
+3. Scroll down to the **Security** section. You'll see *"MyPet.app" was blocked to protect
+   your Mac*.
+4. Click **Open Anyway**.
+5. Click **Open Anyway** again in the pop-up, then confirm with your Mac password or Touch ID.
+
+MyPet opens, and your Mac remembers your choice. You won't see the warning again, even after
+MyPet updates itself.
+
+**On macOS 13 Ventura or 14 Sonoma:**
+
+1. Open your **Applications** folder.
+2. Hold **Control** and click **MyPet** (or right-click it), then choose **Open**.
+3. Click **Open** in the dialog.
+
+<details>
+<summary><b>Comfortable with Terminal? There's a one-line alternative.</b></summary>
+
+macOS adds a "downloaded from the internet" tag to every file you download. This command
+removes that tag from MyPet only, so macOS stops asking:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/MyPet.app
+```
+
+It changes nothing else on your Mac and doesn't turn off any security setting.
+</details>
+
+### Why you can trust MyPet
+
+You don't have to take our word for it. Here's what MyPet does and doesn't do, and how you can
+check each point yourself.
+
+| | |
+|---|---|
+| 📖 **All the code is public** | Every line is in this repository, under the MIT licence. Anyone can read it, and many people can spot a problem. |
+| 🏗️ **Built in public** | Each release is built by GitHub Actions straight from the code you see here, not on someone's laptop. The build logs are public in the [Actions tab](https://github.com/eramitgupta/my-pet/actions). |
+| 🙈 **No data collection** | No accounts, no analytics, no tracking, no ads. MyPet only reads CPU and memory numbers, the same ones Activity Monitor shows, and keeps everything on your Mac. |
+| 🌐 **Barely goes online** | The only thing it downloads is a small update file from GitHub, once a day or when you click *Check for Updates*. You can switch that off in **Settings → General**. |
+| 🔐 **Asks for no special access** | No access to your files, screen, keyboard, camera, microphone, contacts or location. MyPet itself never asks for your password (the one in step 5 above is macOS confirming your choice). The only thing it may ask for is permission to start at login, and only if you turn that on. |
+| ✍️ **Signed updates** | Every update is digitally signed. MyPet checks the signature and refuses any update that didn't come from this project, even if someone tampered with the download. |
+| 🪶 **Tiny and quiet** | About 1 % CPU while animating, nearly zero when paused, and a 2–3 MB download. |
+
+### Stay safe
+
+- **Download MyPet only from the [Releases page](https://github.com/eramitgupta/my-pet/releases)**
+  of this repository. If you find MyPet anywhere else, don't trust that copy.
+- **Want to be extra sure?** You can [build MyPet yourself](#for-developers) from the source
+  code with a few commands.
+- **Spotted something odd?** Please [report it privately](SECURITY.md), and we'll look into it.
+
+Once MyPet is notarised by Apple, this warning will go away on its own and this section will
+say so.
 
 ## Questions people ask
 
@@ -156,7 +235,7 @@ formulas are in [docs/METRICS.md](docs/METRICS.md).
 MyPet has no accounts and no analytics. It reads your CPU and memory statistics through standard
 macOS APIs and keeps its settings on your Mac. The only time it goes online is to **check for
 updates**: it fetches a small file from GitHub once a day, or when you click *Check for
-Updates…*. You can turn automatic checks off in **Settings → General**.
+Updates*. You can turn automatic checks off in **Settings → General**.
 </details>
 
 <details>
