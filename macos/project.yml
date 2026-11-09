@@ -13,7 +13,7 @@ packages:
     from: 2.10.0
 settings:
   base:
-    MARKETING_VERSION: "0.0.1"
+    MARKETING_VERSION: "0.0.2"
     # Sparkle compares CFBundleVersion, so it equals the release version (see build-app.sh).
     CURRENT_PROJECT_VERSION: "$(MARKETING_VERSION)"
     SWIFT_VERSION: "5.0"
@@ -41,9 +41,9 @@ targets:
     sources:
       - path: mypet
         excludes:
-          - "Assets/Pets/**"
-          - "Assets/AppIcon.icns"
-      - path: mypet/Assets/Pets
+          - "Resources/Pets/**"
+          - "Resources/AppIcon.icns"
+      - path: mypet/Resources/Pets
         type: folder           # copied as a folder reference → Contents/Resources/Pets
         buildPhase: resources
     settings:
@@ -51,8 +51,8 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.erag.mypet
         PRODUCT_NAME: MyPet          # → MyPet.app (the name people see)
         PRODUCT_MODULE_NAME: mypet   # Swift module stays `mypet` (tests use @testable import mypet)
-        INFOPLIST_FILE: mypet/Info.plist
-        CODE_SIGN_ENTITLEMENTS: mypet/mypet.entitlements
+        INFOPLIST_FILE: mypet/Support/Info.plist
+        CODE_SIGN_ENTITLEMENTS: mypet/Support/mypet.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         SWIFT_INCLUDE_PATHS: "$(SRCROOT)/CPetCore"
         HEADER_SEARCH_PATHS: "$(SRCROOT)/../include"
