@@ -10,7 +10,7 @@ import UniformTypeIdentifiers
 
 let root = URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent()
     .appendingPathComponent("..").standardizedFileURL
-let pets = root.appendingPathComponent("macos/mypet/Assets/Pets")
+let pets = root.appendingPathComponent("macos/mypet/Resources/Pets")
 let out = root.appendingPathComponent("docs/banner.png")
 
 let scale: CGFloat = 2

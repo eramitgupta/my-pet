@@ -49,7 +49,7 @@ Simulate power states on a Mac without a battery by launching with
 check that MyPet never holds a sleep assertion: `pmset -g assertions | grep MyPet` should print
 nothing. Baseline: about 4.5–6.6 idle wakeups/s and Energy Impact ≈ 0.65 while animating on AC,
 and about 0–1 /s when paused. Wakeups are noisy, so run each scenario twice with 15 samples.
-The energy rules live in `App/EnergyPolicy.swift`.
+The energy rules live in `Services/EnergyPolicy.swift`.
 
 ## Investigate
 

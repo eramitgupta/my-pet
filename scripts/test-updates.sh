@@ -24,7 +24,7 @@ quiet() { "$@" >"$WORK/step.log" 2>&1 || { cat "$WORK/step.log"; fail "$1 failed
 version_of() { /usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' "$1/Contents/Info.plist"; }
 
 echo "▸ Throwaway signing key"
-swift "$ROOT/tests/update-harness/genkey.swift" "$WORK"
+swift "$ROOT/macos/Tests/UpdateHarness/genkey.swift" "$WORK"
 export MYPET_SPARKLE_PUBLIC_KEY="$(cat "$WORK/public.key")"
 NEW="$(sed -n 's/^version = "\(.*\)"/\1/p' "$ROOT/Cargo.toml" | head -1)"
 export MYPET_ARCHS="$(uname -m)"
@@ -45,7 +45,7 @@ for _ in 1 2 3 4 5 6 7 8 9 10; do curl -sf "http://127.0.0.1:$PORT/appcast.xml" 
 
 echo "▸ Building the Sparkle test harness"
 swiftc -F "$FW" -framework Sparkle -Xlinker -rpath -Xlinker "$FW" \
-  -o "$WORK/harness" "$ROOT/tests/update-harness/main.swift" 2>/dev/null
+  -o "$WORK/harness" "$ROOT/macos/Tests/UpdateHarness/main.swift" 2>/dev/null
 FEED="http://127.0.0.1:$PORT/appcast.xml"
 
 echo "▸ Test 1: update is found, downloaded, verified and installed"

@@ -1,14 +1,6 @@
 import CPetCore
 import Foundation
 
-/// Latest metrics for the UI. Main-thread only; the only object views subscribe to.
-@MainActor
-final class MetricsStore: ObservableObject {
-    @Published private(set) var latest: PetMetrics?
-
-    func publish(_ m: PetMetrics) { latest = m }
-}
-
 /// Samples system metrics on one background serial queue and delivers each sample to the
 /// main thread. Owns the single shared `MetricsEngine`, so both pets read the same data.
 final class MonitorService {

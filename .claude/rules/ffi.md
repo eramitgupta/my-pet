@@ -5,8 +5,8 @@ paths:
   - "include/**/*.h"
   - "macos/CPetCore/**"
   - "macos/mypet/Bridge/**/*.swift"
-  - "tests/header_check.rs"
-  - "tests/ffi_roundtrip.rs"
+  - "rust/pet-core/tests/header_check.rs"
+  - "rust/pet-core/tests/ffi_roundtrip.rs"
 ---
 
 # Rust ↔ Swift boundary rules
@@ -25,8 +25,8 @@ rules exist because a silent layout mismatch corrupts memory.
 - **Threading:** `PetEngine` is used only on the monitor queue and `PetActor` only on the main
   thread. A handle is never shared across threads.
 - **One change, all layers, one commit:** Rust type/function → bump `ABI_VERSION` (`lib.rs`) and
-  `PET_CORE_ABI_VERSION` (header) together → header → `tests/header_check.rs` probe and
-  `rust_layout()` → `tests/ffi_roundtrip.rs` → `RustBridge.swift`.
+  `PET_CORE_ABI_VERSION` (header) together → header → `rust/pet-core/tests/header_check.rs` probe and
+  `rust_layout()` → `rust/pet-core/tests/ffi_roundtrip.rs` → `RustBridge.swift`.
 - **Only `macos/mypet/Bridge/RustBridge.swift` calls C functions.** Everything else uses its
   wrappers (`MetricsEngine`, `PetActorHandle`, `RustBridge.sampleBands`). Compare statuses with
   `PetStatus(PET_OK)`.

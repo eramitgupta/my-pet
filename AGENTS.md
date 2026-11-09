@@ -24,9 +24,10 @@ or pressure and whose speed follows CPU. Tagline: *Your Mac's Little Companion.*
 |---|---|
 | `rust/pet-core/src/` | `monitoring/` (CPU, memory, pressure), `engine/` (gradient, animation), `ffi.rs`, `sys.rs` |
 | `include/pet_core.h` | hand-written C header for the Rust library |
-| `tests/` | Rust integration tests (FFI round trip, header layout, no-alloc tick, live sampling) |
-| `macos/mypet/` | Swift app: `App/`, `MenuBar/`, `Animation/`, `Settings/`, `Bridge/`, `Assets/` |
-| `macos/Tests/mypetTests/` | XCTest suite |
+| `rust/pet-core/tests/` | Rust integration tests (FFI round trip, header layout, no-alloc tick, live sampling) |
+| `macos/mypet/` | Swift app: `App/`, `Bridge/`, `Models/`, `Services/`, `Animation/`, `MenuBar/`, `Settings/`, `Resources/`, `Support/` |
+| `macos/Tests/mypetTests/` | XCTest suite, folders mirror `macos/mypet/` |
+| `macos/Tests/UpdateHarness/` | Sparkle end-to-end update harness |
 | `macos/project.yml` | XcodeGen spec → `macos/mypet.xcodeproj` (generated) |
 | `scripts/` | build, DMG, notarisation, sprite and icon generators |
 
@@ -66,7 +67,7 @@ the app builds and launches.
    only in `EnergyPolicy`.
 3. **Safe boundary.** C-compatible `#[repr(C)]` types only. Every export null-checks its
    pointers, catches panics and returns `PetStatus`. An ABI change updates Rust, the header,
-   `tests/header_check.rs` and `RustBridge.swift` together, with a bumped `ABI_VERSION`.
+   `rust/pet-core/tests/header_check.rs` and `RustBridge.swift` together, with a bumped `ABI_VERSION`.
 4. **Threading.** Rust spawns no threads. The metrics engine is used only on Swift's monitor
    queue and pet actors only on the main thread.
 5. **Tests with behaviour.** Engine logic lives in Rust with unit tests: exact values,
@@ -79,11 +80,12 @@ the app builds and launches.
 
 | Before editing… | Read |
 |---|---|
-| `rust/**`, `tests/**`, `Cargo.toml` | `.agents/rules/rust.md` |
+| adding, moving or splitting any file; adding tests | `.agents/rules/structure.md` |
+| `rust/**`, `Cargo.toml` | `.agents/rules/rust.md` |
 | `ffi.rs`, `include/*.h`, `macos/mypet/Bridge/**` | `.agents/rules/ffi.md` |
 | any `*.swift` | `.agents/rules/swift.md` |
 | `macos/mypet/Settings/**`, `MenuBar/*View.swift` | `.agents/rules/swiftui.md` |
-| `macos/mypet/{App,Animation}/**`, `MenuBarController.swift`, `MonitorService.swift` | `.agents/rules/appkit.md` |
+| `macos/mypet/{App,Animation,Services}/**`, `MenuBarController.swift` | `.agents/rules/appkit.md` |
 | `scripts/**`, `.github/**`, `project.yml`, `Package.swift` | `.agents/rules/build-scripts.md` |
 
 ## Available skills

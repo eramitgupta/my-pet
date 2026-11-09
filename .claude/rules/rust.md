@@ -1,7 +1,7 @@
 ---
 paths:
   - "rust/**/*.rs"
-  - "tests/**/*.rs"
+  - "rust/pet-core/tests/**/*.rs"
   - "**/Cargo.toml"
 ---
 
@@ -21,7 +21,7 @@ paths:
 - **Mach counters are `u32` and wrap.** Use `wrapping_sub` on tick deltas.
 - **Zero allocation on the per-frame path.** Anything reachable from `Actor::tick` or
   `update_metrics` uses inline arrays and `Copy` types, not `Vec`/`String`/`Box`.
-  `tests/no_alloc_tick.rs` enforces this.
+  `rust/pet-core/tests/no_alloc_tick.rs` enforces this.
 - **Determinism.** The engine has no randomness and never reads the clock: all time arrives as
   `dt`, so every result is reproducible in tests. Turn-around randomness lives in Swift
   (`FacingController`, injectable).

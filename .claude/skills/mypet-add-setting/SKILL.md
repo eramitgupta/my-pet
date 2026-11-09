@@ -14,7 +14,7 @@ Settings flow in one direction:
 Every change applies live with no restart and survives relaunch. The `facing` setting
 (`PetFacing`) is a complete recent example to copy.
 
-## 1. Model (`macos/mypet/Settings/PetSettings.swift`)
+## 1. Model (`macos/mypet/Models/PetSettings.swift`)
 
 - If the value has a fixed set of options, add an `enum X: String, Codable, CaseIterable,
   Identifiable` with `title` (and `symbol` if it appears in a picker).

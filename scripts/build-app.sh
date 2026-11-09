@@ -67,13 +67,13 @@ sed -e "s/\$(EXECUTABLE_NAME)/MyPet/" \
     -e "s/\$(MACOSX_DEPLOYMENT_TARGET)/13.0/" \
     -e "s#\$(SPARKLE_FEED_URL)#$SPARKLE_FEED_URL#" \
     -e "s#\$(SPARKLE_PUBLIC_KEY)#$SPARKLE_PUBLIC_KEY#" \
-    "$MACOS/mypet/Info.plist" > "$APP/Contents/Info.plist"
+    "$MACOS/mypet/Support/Info.plist" > "$APP/Contents/Info.plist"
 plutil -lint -s "$APP/Contents/Info.plist"
 printf 'APPL????' > "$APP/Contents/PkgInfo"
 [[ -n "$SPARKLE_PUBLIC_KEY" ]] || echo "  note: no SPARKLE_PUBLIC_KEY, so this build can't update itself (see docs/UPDATES.md)"
 
-rsync -a --delete --exclude '.DS_Store' "$MACOS/mypet/Assets/Pets/" "$APP/Contents/Resources/Pets/"
-cp "$MACOS/mypet/Assets/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
+rsync -a --delete --exclude '.DS_Store' "$MACOS/mypet/Resources/Pets/" "$APP/Contents/Resources/Pets/"
+cp "$MACOS/mypet/Resources/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
 
 # Sparkle.framework from the resolved SwiftPM artifact. ditto keeps its symlinks intact.
 SPARKLE_FW="$MACOS/.build/artifacts/sparkle/Sparkle/Sparkle.xcframework/macos-arm64_x86_64/Sparkle.framework"
@@ -93,7 +93,7 @@ FW="$APP/Contents/Frameworks/Sparkle.framework/Versions/B"
 "${SIGN[@]}" "$FW/Autoupdate"
 "${SIGN[@]}" "$FW/Updater.app"
 "${SIGN[@]}" "$APP/Contents/Frameworks/Sparkle.framework"
-"${SIGN[@]}" --entitlements "$MACOS/mypet/mypet.entitlements" "$APP"
+"${SIGN[@]}" --entitlements "$MACOS/mypet/Support/mypet.entitlements" "$APP"
 codesign --verify --strict --deep "$APP"
 
 echo "✓ $APP ($(lipo -archs "$APP/Contents/MacOS/MyPet"), $(du -sh "$APP" | cut -f1))"

@@ -7,7 +7,7 @@ description: Add a new animated pet (or redesign an existing one) for MyPet — 
 
 A pet is a folder with `manifest.json` and five horizontal sprite strips (idle, walk, run,
 jump, sleep), plus optional grayscale masks. `SpriteLibrary` loads bundled pets from
-`macos/mypet/Assets/Pets/` and user pets from `~/Library/Application Support/MyPet/Pets/`.
+`macos/mypet/Resources/Pets/` and user pets from `~/Library/Application Support/MyPet/Pets/`.
 An invalid pet is skipped and logged; it never crashes the app.
 
 ## Choose the route

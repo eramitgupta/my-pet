@@ -35,7 +35,7 @@ paths:
   → Autoupdate → Updater.app → Sparkle.framework → the app (see `build-app.sh`).
 - **Signing keys:** the Sparkle private key reaches `sign_update` only through stdin
   (`--ed-key-file -`) or the Keychain. Never write it to the repository or logs. Test keys come
-  from `tests/update-harness/genkey.swift` into a `mktemp` directory, which is deleted
+  from `macos/Tests/UpdateHarness/genkey.swift` into a `mktemp` directory, which is deleted
   afterwards.
 - **Universal binaries:** SwiftPM's `--show-bin-path` is shared between architectures, so
   copy each slice out before building the next one, then `lipo`. Verify with `lipo -archs`.

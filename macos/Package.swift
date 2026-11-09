@@ -22,7 +22,7 @@ let package = Package(
             name: "mypet",
             dependencies: ["CPetCore", .product(name: "Sparkle", package: "Sparkle")],
             path: "mypet",
-            exclude: ["Assets", "Info.plist", "mypet.entitlements"],
+            exclude: ["Resources", "Support"],
             linkerSettings: [
                 .unsafeFlags([
                     "-L\(root)/target/universal/\(rustConfig)",

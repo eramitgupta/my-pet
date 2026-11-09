@@ -1,7 +1,7 @@
 #!/usr/bin/env swift
 // Renders the app icon from the bundled cat sprite.
 //   swift scripts/generate-icon.swift
-// Writes macos/mypet/Assets/AppIcon.icns and the Xcode asset catalog icon set.
+// Writes macos/mypet/Resources/AppIcon.icns and the Xcode asset catalog icon set.
 
 import AppKit
 import CoreGraphics
@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 
 let root = URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent()
     .appendingPathComponent("..").standardizedFileURL
-let assets = root.appendingPathComponent("macos/mypet/Assets")
+let assets = root.appendingPathComponent("macos/mypet/Resources")
 let pets = assets.appendingPathComponent("Pets")
 
 func load(_ url: URL) -> CGImage {

@@ -44,9 +44,9 @@ what the pet looks like. Swift owns threads, timers and UI; Rust owns the number
 - **Garbage in**: NaN, negative, huge `dt` and zero denominators must not panic or produce
   non-finite output.
 - **Counters**: Mach tick counters are `u32` and wrap, so use `wrapping_sub` and test the wrap.
-- **Per-frame path**: anything called from `Actor::tick` must keep `tests/no_alloc_tick.rs`
+- **Per-frame path**: anything called from `Actor::tick` must keep `rust/pet-core/tests/no_alloc_tick.rs`
   at zero allocations. Use inline arrays, not `Vec`.
-- **Live sanity**: if the new metric reads the real system, extend `tests/live_sampling.rs`
+- **Live sanity**: if the new metric reads the real system, extend `rust/pet-core/tests/live_sampling.rs`
   with range checks and keep exact values out of it.
 
 ## Verify

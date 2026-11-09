@@ -47,12 +47,16 @@ automatically.
 
 | Path | What lives there |
 |---|---|
-| `rust/pet-core/` | Rust engine: CPU/memory monitoring, colour gradient, animation, FFI |
+| `rust/pet-core/src/` | Rust engine: CPU/memory monitoring, colour gradient, animation, FFI |
+| `rust/pet-core/tests/` | Rust integration tests |
 | `include/pet_core.h` | The C interface between Rust and Swift (hand-written) |
-| `macos/mypet/` | Swift app: menu bar, settings UI, rendering, assets |
+| `macos/mypet/` | Swift app, one folder per role: `App`, `Bridge`, `Models`, `Services`, `Animation`, `MenuBar`, `Settings`, `Resources`, `Support` |
+| `macos/Tests/` | XCTest suite (folders mirror `macos/mypet/`) and the Sparkle update harness |
 | `scripts/` | Build, packaging and asset-generation scripts |
-| `tests/` | Rust integration tests |
-| `docs/` | Metric definitions and performance notes |
+| `docs/` | Metric definitions, performance and update notes |
+
+Where a new file belongs, and which tests every change needs, is spelled out in
+[.agents/rules/structure.md](.agents/rules/structure.md).
 
 [GUIDELINES.md](GUIDELINES.md) explains the architecture, the Rust↔Swift contract, threading
 rules and the performance budget. Please read it before making non-trivial changes.
@@ -88,7 +92,7 @@ Then check these:
 - **New behaviour comes with tests.** Logic belongs in Rust where possible, because it is easy
   to unit-test there.
 - **Changing the Rust↔Swift interface?** Bump `ABI_VERSION` and `PET_CORE_ABI_VERSION`, update
-  `include/pet_core.h`, and keep `tests/header_check.rs` green.
+  `include/pet_core.h`, and keep `rust/pet-core/tests/header_check.rs` green.
 - **Touching rendering, timers or sampling?** Measure CPU before and after (see
   [docs/PERFORMANCE.md](docs/PERFORMANCE.md)). The budget is under 1.5 % CPU while animating.
 - **UI changes:** check light and dark mode and keyboard navigation, and include a screenshot

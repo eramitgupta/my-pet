@@ -9,7 +9,7 @@
  * Colours:   gamma-encoded sRGB components in 0..1.
  *
  * Keep in sync with rust/pet-core/src/{ffi.rs,engine/mod.rs,monitoring/mod.rs}.
- * tests/header_check.rs verifies struct layouts; bump PET_CORE_ABI_VERSION on any change.
+ * rust/pet-core/tests/header_check.rs verifies struct layouts; bump PET_CORE_ABI_VERSION on any change.
  */
 #ifndef PET_CORE_H
 #define PET_CORE_H

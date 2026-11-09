@@ -29,25 +29,39 @@ same change.
 ## 2. Repository layout
 
 ```
-mypet/
+my-pet/
 ├── Cargo.toml                    # Rust workspace
-├── rust/pet-core/src/
-│   ├── lib.rs, sys.rs            # sys.rs: hand-written Mach/sysctl declarations
-│   ├── monitoring/{mod,cpu,memory}.rs
-│   ├── engine/{mod,gradient,animation}.rs
-│   └── ffi.rs                    # the only module with `extern "C"` exports
+├── rust/pet-core/
+│   ├── src/
+│   │   ├── lib.rs, sys.rs        # sys.rs: hand-written Mach/sysctl declarations
+│   │   ├── monitoring/{mod,cpu,memory}.rs
+│   │   ├── engine/{mod,gradient,animation}.rs
+│   │   └── ffi.rs                # the only module with `extern "C"` exports
+│   └── tests/                    # integration tests: FFI, header layout, no-alloc, live
 ├── include/pet_core.h            # C header, hand-written, layout-checked by a test
-├── tests/                        # Rust integration tests (FFI, header layout, no-alloc, live)
 ├── macos/
 │   ├── Package.swift             # SwiftPM build (works with Command Line Tools only)
 │   ├── project.yml → mypet.xcodeproj   # XcodeGen spec and generated project
 │   ├── CPetCore/module.modulemap # exposes pet_core.h to Swift
-│   ├── mypet/{App,MenuBar,Animation,Settings,Bridge,Assets}
-│   └── Tests/mypetTests         # XCTest (needs full Xcode)
+│   ├── mypet/                    # the app (Swift module `mypet`)
+│   │   ├── App/                  # entry point, AppDelegate, AppInfo
+│   │   ├── Bridge/               # RustBridge.swift: the only code that calls C
+│   │   ├── Models/               # plain data, persistence, observable stores
+│   │   ├── Services/             # monitoring, power, energy policy, login item, updates
+│   │   ├── Animation/            # sprites, tinting, frame timing, facing
+│   │   ├── MenuBar/              # status item controller and popover view
+│   │   ├── Settings/             # settings window and its views
+│   │   ├── Resources/            # Assets.xcassets, AppIcon.icns, Pets/
+│   │   └── Support/              # Info.plist, entitlements
+│   └── Tests/
+│       ├── mypetTests/           # XCTest, folders mirror mypet/ (needs full Xcode)
+│       └── UpdateHarness/        # Sparkle end-to-end harness (scripts/test-updates.sh)
 ├── scripts/                      # build-rust, build-app, make-dmg, notarize, generators
-├── docs/                         # METRICS.md, PERFORMANCE.md, pets-preview.png
+├── docs/                         # METRICS.md, PERFORMANCE.md, UPDATES.md, images
 └── .github/workflows/            # ci.yml, release.yml
 ```
+
+Where new code goes, and which tests it needs, is defined in `.agents/rules/structure.md`.
 
 ---
 
@@ -102,7 +116,7 @@ mypet/
 - A handle must not be used from two threads at once; distinct handles are independent.
 - `pet_core_abi_version()` must equal `PET_CORE_ABI_VERSION`; the app refuses to start
   otherwise. Changing a struct = bump `ABI_VERSION`, update the header and `RustBridge.swift`
-  in one commit. `tests/header_check.rs` compiles a C probe and compares every size/offset.
+  in one commit. `rust/pet-core/tests/header_check.rs` compiles a C probe and compares every size/offset.
 
 Surface: `pet_engine_{new,free,sample,note_pressure_event}`,
 `pet_actor_{new,free,configure,set_gradient,set_bands,update_metrics,tick}`,
@@ -200,7 +214,7 @@ Views use `State` as a plain stored `DynamicProperty` (`private let x = State(in
 | Idle wakeups while animating | as few as possible | 4.5–6.6 /s (Energy Impact ≈ 0.65) |
 | Resident memory | < 40 MB | 17–37 MB |
 
-Rules: decode once; no per-frame heap allocation in Rust (`tests/no_alloc_tick.rs`); tick at
+Rules: decode once; no per-frame heap allocation in Rust (`rust/pet-core/tests/no_alloc_tick.rs`); tick at
 sprite rate; no SwiftUI view receives per-frame updates; stop timers whenever nothing is
 visible. Profile with Instruments (Time Profiler, Allocations, Leaks, Energy) when full Xcode is
 available; otherwise `ps`/`top`/`sample` — and say which was used.
@@ -237,7 +251,7 @@ available; otherwise `ps`/`top`/`sample` — and say which was used.
 
 ## 11a. Updates (Sparkle 2)
 
-- `App/UpdateController.swift` wraps `SPUStandardUpdaterController`. Sparkle provides all update
+- `Services/UpdateController.swift` wraps `SPUStandardUpdaterController`. Sparkle provides all update
   UI (the update window with versions and release notes, "up to date", errors), the EdDSA
   verification, installation and relaunch. Entry points: the popover, the app menu, and
   Settings → General (automatic checks and automatic install toggles, Check Now).

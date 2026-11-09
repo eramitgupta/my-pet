@@ -6,7 +6,7 @@ description: "Safely change the Rust↔Swift boundary in MyPet — add or modify
 # Changing the MyPet FFI
 
 The Swift app talks to `libpet_core.a` only through `include/pet_core.h`. That header is
-**hand-written**. The safety net is `tests/header_check.rs`, which compiles a C probe against
+**hand-written**. The safety net is `rust/pet-core/tests/header_check.rs`, which compiles a C probe against
 the header and compares every struct size and field offset with the Rust layout. A mismatch
 that slips through corrupts memory silently, so make the whole change in one go.
 
@@ -27,10 +27,10 @@ that slips through corrupts memory silently, so make the whole change in one go.
    and types (`uint8_t`/`uint32_t`/`uint64_t`/`float`), and add enum constants as anonymous
    `enum { … }`.
 4. **Layout test**: add the new struct and every field to `PROBE` and `rust_layout()` in
-   `tests/header_check.rs`.
+   `rust/pet-core/tests/header_check.rs`.
 5. **Behaviour tests**: unit tests next to the Rust code, plus a round trip in
-   `tests/ffi_roundtrip.rs` (null pointers → `PET_ERR_NULL`, bad values → `PET_ERR_INVALID`).
-   When the function sits in the per-frame path, keep `tests/no_alloc_tick.rs` green: no heap
+   `rust/pet-core/tests/ffi_roundtrip.rs` (null pointers → `PET_ERR_NULL`, bad values → `PET_ERR_INVALID`).
+   When the function sits in the per-frame path, keep `rust/pet-core/tests/no_alloc_tick.rs` green: no heap
    allocation per tick.
 6. **Swift wrapper**: only `macos/mypet/Bridge/RustBridge.swift` calls C functions. Wrap the
    new call there (handle classes free in `deinit`, compare statuses with `PetStatus(PET_OK)`,

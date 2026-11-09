@@ -91,7 +91,7 @@ The menu bar never holds a power assertion, so it never keeps the Mac awake
    locked or when displays sleep.
 4. **Cache tinted frames.** Keyed by (pet, animation, frame, colour at 7 bits/channel); during a
    colour transition only displayed frames are rendered.
-5. **Zero-allocation Rust tick.** `tests/no_alloc_tick.rs` runs 10 000 ticks under a counting
+5. **Zero-allocation Rust tick.** `rust/pet-core/tests/no_alloc_tick.rs` runs 10 000 ticks under a counting
    global allocator and asserts zero allocations.
 6. **Jitter-proof frame stepping.** The host timer fires up to ~10 % late on any tick. With a
    strict "frame due at ≥ 1.0" rule, an early tick showed nothing and the next jumped two

@@ -3,7 +3,7 @@
 //
 //   swift scripts/generate-sprites.swift [output-dir] [--preview preview.png]
 //
-// Default output: macos/mypet/Assets/Pets. The PNGs are committed, so this only needs to
+// Default output: macos/mypet/Resources/Pets. The PNGs are committed, so this only needs to
 // run when the art changes.
 //
 // How the art is built: each frame is drawn from simple shapes (ellipses, thick lines,
@@ -697,7 +697,7 @@ if let i = args.firstIndex(of: "--preview"), i + 1 < args.count {
 }
 let scriptDir = URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent()
 let outRoot = args.first.map { URL(fileURLWithPath: $0) }
-    ?? scriptDir.appendingPathComponent("../macos/mypet/Assets/Pets").standardizedFileURL
+    ?? scriptDir.appendingPathComponent("../macos/mypet/Resources/Pets").standardizedFileURL
 
 let fm = FileManager.default
 var previewRows: [(Species, [String: [Canvas]])] = []

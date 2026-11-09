@@ -3,7 +3,7 @@ paths:
   - "macos/mypet/App/**/*.swift"
   - "macos/mypet/MenuBar/MenuBarController.swift"
   - "macos/mypet/Animation/**/*.swift"
-  - "macos/mypet/Bridge/MonitorService.swift"
+  - "macos/mypet/Services/*.swift"
 ---
 
 # AppKit & Core Animation rules
@@ -21,7 +21,7 @@ The budget is < 1.5 % CPU animating and ≈ 0 % paused (measured: ~1 % and 0.03 
 - **Timers:** use `FrameTicker` only (a `Timer` in `.common` mode with 20 % tolerance) at
   sprite fps × speed. Never tick at display refresh rate or busy-loop. Change rates through
   `run(interval:)`, which skips no-op restarts.
-- **Energy rules live only in `App/EnergyPolicy.swift`** (pure, tested). It stops animation when
+- **Energy rules live only in `Services/EnergyPolicy.swift`** (pure, tested). It stops animation when
   nothing is visible (paused, asleep, locked, displays off, or the menu bar hidden by full screen
   or auto-hide, detected from status-item window occlusion), samples every 15 s when nothing
   shows numbers, and caps fps on battery (8) and in Low Power Mode (5). Feed it new inputs; don't

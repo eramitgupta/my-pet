@@ -62,7 +62,7 @@ final class SpriteLibrary {
             // `swift run` during development: use the source tree's assets.
             let source = URL(fileURLWithPath: #filePath)
                 .deletingLastPathComponent().deletingLastPathComponent()
-                .appendingPathComponent("Assets/Pets")
+                .appendingPathComponent("Resources/Pets")
             dirs.append(source)
         }
         if let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {

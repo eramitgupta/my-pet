@@ -415,17 +415,6 @@ struct UpdatesSection: View {
 
 // MARK: - About
 
-enum AppInfo {
-    /// The name people see (Finder, Spotlight, menus). Identifiers stay lowercase: com.erag.mypet.
-    static let name = "MyPet"
-    static let tagline = "Your Mac’s Little Companion."
-}
-
-enum ProjectLinks {
-    static let author = URL(string: "https://github.com/eramitgupta")!
-    static let sponsor = URL(string: "https://github.com/sponsors/eramitgupta")!
-}
-
 struct AboutPane: View {
     private var version: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "dev"
